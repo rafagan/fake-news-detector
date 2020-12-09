@@ -4,6 +4,8 @@ services:
   web:
     image: fake_news_detector_web_dev
     build: .
+    ports:
+      - "5000:5000"
     env_file:
       - ./config/dev/.env
     command: sh ./config/dev/deploy.sh

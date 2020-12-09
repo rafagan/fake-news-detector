@@ -1,3 +1,3 @@
 cd /app
 pip install -r ./requirements.txt
-flask run
+flask run --host 0.0.0.0

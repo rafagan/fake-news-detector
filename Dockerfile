@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.8
 MAINTAINER Pedro Verani
 
 ENV PYTHONUNBUFFERED 1
@@ -6,18 +6,14 @@ ENV LANG C.UTF-8
 
 COPY ./requirements.txt .
 
-RUN apk update && \
-	apk upgrade && \
-	apk add --no-cache postgresql-dev gcc python3-dev musl-dev build-base linux-headers pcre-dev pcre && \
-	pip install --upgrade pip && \
-	pip install --require-hashes --no-cache-dir -r requirements.txt && \
-	apk del gcc python3-dev musl-dev build-base linux-headers pcre-dev pcre && \
-	rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade pip && \
+	pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
-RUN adduser -D tcc && \
+RUN adduser tcc && \
 	mkdir /app/static && \
 	chown -R tcc /app
 
+EXPOSE 5000
 WORKDIR /app
 USER tcc
