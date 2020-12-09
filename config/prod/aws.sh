@@ -21,3 +21,11 @@ printf '#!/bin/sh\n\nGIT_WORK_TREE=/home/ubuntu/fake-news-detector git checkout 
   cd /home/ubuntu/fake-news-detector
   docker-compose down && docker-compose up -d' > ./hooks/post-receive
 chmod +x ./hooks/post-receive
+
+# Configurar .env
+
+# Localmente
+git remote add aws fake-news:/home/ubuntu/fake-news-detector.git
+
+# Inicializar
+docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
