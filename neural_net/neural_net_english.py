@@ -85,7 +85,6 @@ import re
 ps = PorterStemmer()
 corpus = []
 for i in range(0, len(X)):
-    print(f'Processing {i} of {len(X)}')
     # Remove tudo que não for letra
     review = re.sub('[^a-zA-Z]', ' ', X['title'][i] + ' ' + X['text'][i])
     # Torna tudo minúsculo
@@ -99,6 +98,8 @@ for i in range(0, len(X)):
     review = ' '.join(review)
     # Adiciona à lista de frases
     corpus.append(review)
+
+    print(f'Processing {i} of {len(X)}')
 
 
 # Total de palavras estimadas
