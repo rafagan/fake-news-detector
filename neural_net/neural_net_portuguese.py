@@ -18,15 +18,16 @@ from sklearn.metrics import accuracy_score
 df = pd.read_csv('train/input_portuguese.csv')
 df = df.dropna()
 X = df.drop('label', axis=1)
-y = df['label']
+y = df['label']  # y.map(lambda x: x != 'fake').tolist()
 X.reset_index(inplace=True)
 
 nltk.download('stopwords')
+nltk.download('rslp')
 ps = nltk.RSLPStemmer()
 corpus = []
 for i in range(0, len(X)):
     print(f'Processing {i} of {len(X)}')
-    review = re.sub('[^a-zA-Z]', ' ', X['title'][i])
+    review = re.sub('[^a-zA-Z]', ' ', X['text'][i])
     review = review.lower()
     review = review.split()
     review = [ps.stem(word) for word in review if word not in stopwords.words('portuguese')]
