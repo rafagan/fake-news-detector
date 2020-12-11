@@ -26,13 +26,14 @@ nltk.download('rslp')
 ps = nltk.RSLPStemmer()
 corpus = []
 for i in range(0, len(X)):
-    print(f'Processing {i} of {len(X)}')
     review = re.sub('[^a-zA-Z]', ' ', 'os ' + X['text'][i])
     review = review.lower()
     review = review.split()
     review = [ps.stem(word) for word in review if word not in stopwords.words('portuguese')]
     review = ' '.join(review)
     corpus.append(review)
+
+    print(f'Processing {i} of {len(X)}')
 
 vocabulary_size = 5000
 bag_of_words = [one_hot(words, vocabulary_size) for words in corpus]
