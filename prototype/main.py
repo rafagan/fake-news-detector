@@ -112,8 +112,8 @@ bag_of_words = [one_hot(words, vocabulary_size) for words in corpus]
 # ex (maxlen = 4): {[2, 1, 4, 3], [3, 1, 2]} = {[2, 1, 4, 3], [0, 3, 1, 2]}
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 # Serão adicionados zeros até o vetor possuir 20 valores
-sent_length = 20
-input_net_data = pad_sequences(bag_of_words, padding='pre', maxlen=sent_length)
+neural_input_length = 20
+input_net_data = pad_sequences(bag_of_words, padding='pre', maxlen=neural_input_length)
 
 
 ######
@@ -134,7 +134,7 @@ from tensorflow.keras.layers import Embedding
 # Total de dimensões do vetor (features) a serem descobertas
 # TODO: Ao invés de treinar a rede para descobrir as features, usar a rede já treinada do word2vec ou glove
 embedding_vector_features = 40
-model.add(Embedding(vocabulary_size, embedding_vector_features, input_length=sent_length))
+model.add(Embedding(vocabulary_size, embedding_vector_features, input_length=neural_input_length))
 
 # Desliga 30% da rede
 from tensorflow.keras.layers import Dropout

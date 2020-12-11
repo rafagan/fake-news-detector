@@ -9,7 +9,6 @@ COPY ./requirements.txt .
 RUN pip install --upgrade pip && \
 	pip install --no-cache-dir -r requirements.txt
 
-
 RUN adduser tcc && mkdir /app && chown -R tcc /app
 EXPOSE 5000
 WORKDIR /app

@@ -9,3 +9,5 @@ services:
     env_file:
       - ./config/dev/.env
     command: sh ./config/dev/deploy.sh
+    volumes:
+      - ./:/app

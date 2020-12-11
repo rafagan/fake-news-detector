@@ -1,3 +1,4 @@
+import nltk
 from flask import Flask
 from flask_cors import CORS
 
@@ -9,3 +10,6 @@ CORS(app)
 
 # noinspection PyUnresolvedReferences
 import web.fake_news.api
+
+# Configuração
+nltk.download('stopwords')
