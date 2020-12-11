@@ -32,7 +32,7 @@ import pandas as pd
 
 # id, title, author, text, label
 # df = dataframe
-df = pd.read_csv('train/train.csv')
+df = pd.read_csv('train/input.csv')
 
 # Limpa qualquer linha que possua alguma coluna nula
 df = df.dropna()
@@ -85,8 +85,9 @@ import re
 ps = PorterStemmer()
 corpus = []
 for i in range(0, len(X)):
+    print(f'Processing {i} of {len(X)}')
     # Remove tudo que não for letra
-    review = re.sub('[^a-zA-Z]', ' ', X['title'][i])
+    review = re.sub('[^a-zA-Z]', ' ', X['title'][i])  # X['title'][i] + X['text'][i]
     # Torna tudo minúsculo
     review = review.lower()
     # Pega cada palavra separadas por espaços e forma um array
@@ -179,8 +180,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random
 # epochs: Quantas vezes ele vai executar o treinamento
 # batch_size: De quantas em quantas instâncias vai puxar na memória por vez
 model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_size=64)
-
-# TODO: Salvar e carregar os pesos: model.save_weights, load_weights
+model.save_weights('train/output')
 
 ######
 # 5- Apresentação dos resultados

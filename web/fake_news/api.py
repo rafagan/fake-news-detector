@@ -1,7 +1,7 @@
 import os
 
 from web.fake_news.parser import PredictParser
-from web.main import app
+from web.main import app, vocabulary_size, neural_input_length, model
 from web.utils.decorators import auth, body
 import numpy as np
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -22,9 +22,7 @@ def hello():
 @auth()
 @body(PredictParser)
 def predict(body):
-    vocabulary_size = 5000
-    neural_input_length = 20
-    neural_net_data_path = '/app/neural_net/test.txt'
+    neural_net_data_path = '/app/neural_net/train/output'
 
     ps = PorterStemmer()
     corpus = []
@@ -38,9 +36,6 @@ def predict(body):
     bag_of_words = [one_hot(words, vocabulary_size) for words in corpus]
     X = np.array(pad_sequences(bag_of_words, padding='pre', maxlen=neural_input_length))
 
-    return {'status': 'ok', 'payload': X.tolist()}, 200
-
-    # model = Sequential()
-    # model.load_weights(neural_net_data_path)
-    # y = model.predict_classes(X)
-    # return {'status': 'ok', 'payload': y}, 200
+    model.load_weights(neural_net_data_path)
+    prediction = model.predict(X).tolist()[0][0]
+    return {'status': 'ok', 'prediction': prediction}, 200
