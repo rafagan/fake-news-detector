@@ -87,7 +87,7 @@ corpus = []
 for i in range(0, len(X)):
     print(f'Processing {i} of {len(X)}')
     # Remove tudo que não for letra
-    review = re.sub('[^a-zA-Z]', ' ', X['title'][i])  # X['title'][i] + X['text'][i]
+    review = re.sub('[^a-zA-Z]', ' ', X['title'][i] + ' ' + X['text'][i])
     # Torna tudo minúsculo
     review = review.lower()
     # Pega cada palavra separadas por espaços e forma um array
