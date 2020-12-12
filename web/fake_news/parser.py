@@ -7,5 +7,5 @@ class PredictParser:
         parser = reqparse.RequestParser(bundle_errors=True)
 
         # Primeira etapa
-        parser.add_argument('text', type=str, required=True, help='text is required')
+        parser.add_argument('content', type=str, required=True, help='content is required')
         return parser

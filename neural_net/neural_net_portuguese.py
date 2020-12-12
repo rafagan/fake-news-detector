@@ -15,7 +15,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 
 
-df = pd.read_csv('train/input_portuguese.csv')
+df = pd.read_csv('train/portuguese/input_portuguese.csv')
 df = df.dropna()
 X = df.drop('label', axis=1)
 y = df['label'].map(lambda x: 1 if x != 'fake' else 0).tolist()
@@ -55,7 +55,7 @@ y = np.array(y)
 print(X.shape, y.shape)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42, stratify=y)
 model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_size=64)
-model.save_weights('train/output_portuguese')
+model.save_weights('train/portuguese/output_portuguese')
 
 y_pred = model.predict_classes(X_test)
 print(confusion_matrix(y_test, y_pred))

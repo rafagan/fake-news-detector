@@ -32,7 +32,7 @@ import pandas as pd
 
 # id, title, author, text, label
 # df = dataframe
-df = pd.read_csv('train/input_english.csv')
+df = pd.read_csv('train/english/input_english.csv')
 
 # Limpa qualquer linha que possua alguma coluna nula
 df = df.dropna()
@@ -181,7 +181,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random
 # epochs: Quantas vezes ele vai executar o treinamento
 # batch_size: De quantas em quantas instâncias vai puxar na memória por vez
 model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_size=64)
-model.save_weights('train/output_english')
+model.save_weights('train/english/output_english')
 
 ######
 # 5- Apresentação dos resultados

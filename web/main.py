@@ -19,6 +19,7 @@ vocabulary_size = 5000
 neural_input_length = 20
 
 nltk.download('stopwords')
+nltk.download('rslp')
 
 model = Sequential()
 model.add(Embedding(vocabulary_size, embedding_vector_features, input_length=neural_input_length))
